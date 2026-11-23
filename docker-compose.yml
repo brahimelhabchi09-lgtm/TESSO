@@ -1,0 +1,11 @@
+services:
+  tesso-catalogue:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: tesso-sanitary-catalogue
+    ports:
+      - "8080:80"
+    restart: unless-stopped
+    environment:
+      - NODE_ENV=production
