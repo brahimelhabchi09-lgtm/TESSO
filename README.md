@@ -1,15 +1,19 @@
-# TESSO — Catalogue Sanitaire & Équipements de Bain Haut de Gamme
+# AKWA WAKA — Catalogue Sanitaire & Meubles de Salle de Bain
 
-Catalogue web moderne, élégant et épuré pour une marque d'équipements sanitaires et de salle de bain de prestige.
+Catalogue web moderne, élégant et épuré pour la marque d'équipements sanitaires et mobilier de salle de bain contemporain **AKWA WAKA**.
 
 ---
 
 ## 🌟 Présentation du Projet
 
-- **Identité Visuelle** : Design haut de gamme inspiré des showrooms d'architecture intérieure (marbre, pierre naturelle, laiton brossé, noir onyx, blanc céramique et typographie éditoriale *Cormorant Garamond* & *Plus Jakarta Sans*).
-- **Architecture 100% Frontend** : Aucune dépendance backend/base de données. Données centralisées, légères et faciles à maintenir.
+- **Identité Visuelle** : Palette de marque officielle Bleu Marine (`#092C49`), Bleu Aqua (`#08A6C1`), Aqua Clair (`#E9F4F5`), Fond Chaud (`#F5F4F0`) et Texte Sombre (`#202B35`).
+- **Logo Officiel** : Intégration du logo officiel AKWA WAKA avec goutte d'eau stylisée et silhouette de douche.
+- **Réseaux Sociaux** : Intégration officielle du profil Instagram [https://www.instagram.com/akwa_waka/](https://www.instagram.com/akwa_waka/) (@akwa_waka).
+- **Catalogue Meubles 2026** : 43 modèles réels de meubles de salle de bain extraits du catalogue officiel 2026 avec photos haute définition, références originales (`V60-60 CM`, etc.) et dimensions.
+- **Téléchargement PDF** : Le catalogue complet PDF 2026 est consultable et téléchargeable directement depuis le site.
+- **Architecture 100% Frontend** : Aucune dépendance backend/base de données. Données centralisées dans `src/data/products.ts`.
 - **Support des Devis WhatsApp** : Boutons de devis pré-remplis avec le nom et la référence exacte de chaque produit.
-- **Déploiement Docker & Nginx** : Build multi-stage optimisé, servi par Nginx Alpine avec compression Gzip, gestion du cache et fallback SPA pour React Router.
+- **Déploiement Docker & Nginx** : Build multi-stage optimisé, servi par Nginx Alpine avec compression Gzip, gestion du cache et fallback SPA pour React Router sur le port 8080.
 
 ---
 
@@ -59,21 +63,21 @@ docker compose down
 
 ## 📸 Gestion des Images de Produits
 
-Toutes les images de vos produits doivent être déposées dans le dossier :
+Toutes les images de vos produits sont organisées dans :
 
 ```
 public/images/products/
+├── brand/
+│   └── akwa-waka-logo.png
+├── meubles/              # 43 visuels extraits du CATALOGUE_MEUBLES_2026.pdf
+├── wc/
+├── lavabos/
+├── robinetterie/
+└── accessoires/
 ```
 
-### Vos 2 Premiers Produits de Référence :
-
-1. **Meuble de salle de bain** (Réf: `2043GR-40`) :
-   - Fichier attendu : `public/images/products/meuble-salle-de-bain.jpg`
-2. **WC intelligent** (Réf: `WC-001`) :
-   - Fichier attendu : `public/images/products/wc-intelligent.jpg`
-
 > **Note sur le Fallback Visuel** :  
-> Si vous n'avez pas encore déposé un fichier image, l'application affiche automatiquement un encadré architectural épuré avec la référence du produit et la mention *"Visuel consultable en showroom"*. Aucun visuel cassé n'apparaît.
+> Si une photo de produit est manquante, l'application affiche automatiquement un encadré architectural épuré avec la référence du produit et la mention *"Visuel consultable en showroom"*. Aucun visuel cassé n'apparaît.
 
 ---
 
@@ -86,59 +90,27 @@ Tous les produits et leurs caractéristiques sont gérés dans un fichier unique
 - Si un produit n'a pas de prix défini : indiquez `price: null`. L'interface affiche automatiquement **"Prix sur demande"**.
 - Si un produit a un prix chiffré : indiquez la valeur numérique en Dirhams marocains (ex: `price: 4500` pour afficher `4 500 DH`).
 
-### Exemple d'ajout d'un produit :
-```ts
-{
-  id: 13,
-  name: "Vasque Totem Autoportante Pierre Noire",
-  reference: "VAS-TOT-01",
-  category: "Lavabos et vasques",
-  image: "/images/products/vasque-totem-noire.jpg",
-  price: null, // ou un nombre ex: 6800
-  description: "Vasque colonne monolithique sculptée dans du basalte noir.",
-  shortDescription: "Vasque totem en pierre naturelle finition brute et cuve polie.",
-  featured: true,
-  dimensions: "Ø 45 cm x H 85 cm",
-  material: "Pierre de basalte naturelle",
-  finish: "Noir anthracite adouci",
-  warranty: "10 ans",
-  specifications: [
-    { label: "Installation", value: "Évacuation au sol ou murale standard" },
-    { label: "Poids", value: "65 kg" }
-  ]
-}
-```
-
 ---
 
 ## ⚙️ Configuration du Site & WhatsApp (`src/config/site.ts`)
 
-Pour modifier le numéro WhatsApp, le téléphone, l'adresse du showroom ou les horaires d'ouverture :  
+Pour modifier le numéro WhatsApp, le téléphone, le lien Instagram ou l'adresse :  
 👉 [`src/config/site.ts`](file:///c:/Users/ycode/TESSO/src/config/site.ts)
 
 ```ts
 export const siteConfig = {
-  name: "TESSO Sanitaire",
+  name: "AKWA WAKA",
+  tagline: "Sanitaire & Équipements de Bain d'Exception",
+  logo: "/images/brand/akwa-waka-logo.png",
+  socials: {
+    instagram: "https://www.instagram.com/akwa_waka/",
+  },
   whatsapp: {
-    phoneNumber: "212600000000", // Numéro international sans '+' ni espaces
+    phoneNumber: "212600000000",
     displayNumber: "+212 (0) 6 00 00 00 00",
+    defaultMessage: "Bonjour AKWA WAKA, je souhaite avoir plus d'informations concernant vos produits.",
   },
-  contact: {
-    phone: "+212 (0) 5 22 00 00 00",
-    email: "contact@tesso-sanitaire.ma",
-    address: {
-      full: "Angle Boulevard d'Anfa & Rue de la Corniche, Casablanca, Maroc",
-    },
-    openingHours: {
-      weekdays: "Lundi - Vendredi : 09h00 - 19h00",
-      saturday: "Samedi : 09h30 - 18h30",
-      sunday: "Dimanche : Sur rendez-vous privé",
-    },
-  },
-  currency: {
-    symbol: "DH",
-    onDemandText: "Prix sur demande",
-  }
+  pdfCatalogueUrl: "/CATALOGUE_MEUBLES_2026.pdf",
 };
 ```
 
@@ -149,45 +121,46 @@ export const siteConfig = {
 ```
 TESSO/
 ├── public/
-│   ├── favicon.svg
+│   ├── favicon.svg               # Favicon AKWA WAKA
+│   ├── CATALOGUE_MEUBLES_2026.pdf # Catalogue complet téléchargeable
 │   └── images/
-│       ├── fallback-product.svg
-│       ├── hero-bathroom.svg
-│       └── products/                 <-- Déposez vos photos de produits ici
-│           ├── meuble-salle-de-bain.jpg
-│           ├── wc-intelligent.jpg
-│           └── .gitkeep
+│       ├── brand/
+│       │   └── akwa-waka-logo.png
+│       └── products/
+│           ├── meubles/          # 43 modèles réels de meubles
+│           ├── wc/
+│           ├── lavabos/
+│           ├── robinetterie/
+│           └── accessoires/
 ├── src/
 │   ├── components/
-│   │   ├── Navbar.tsx                # Barre de navigation responsive avec logo & CTA
-│   │   ├── Footer.tsx                # Pied de page avec horaires, coordonnées & liens
-│   │   ├── ProductCard.tsx           # Carte produit avec prix, devis WhatsApp & détails
-│   │   ├── ProductGrid.tsx           # Grille responsive avec gestion de l'état vide
-│   │   ├── ProductImage.tsx          # Gestionnaire d'image locale avec fallback élégant
-│   │   ├── SearchBar.tsx             # Barre de recherche par nom et par référence
-│   │   └── CategoryFilter.tsx        # Filtres de catégories par pilules avec compteurs
+│   │   ├── Navbar.tsx            # Navigation avec logo AKWA WAKA, Instagram & Catalogue PDF
+│   │   ├── Footer.tsx            # Pied de page officiel AKWA WAKA
+│   │   ├── ProductCard.tsx       # Carte produit avec devis WhatsApp
+│   │   ├── ProductGrid.tsx       # Grille responsive avec gestion de l'état vide
+│   │   ├── ProductImage.tsx      # Gestionnaire d'images avec fallback
+│   │   ├── SearchBar.tsx         # Recherche par nom et par référence
+│   │   └── CategoryFilter.tsx    # Filtres par univers avec compteurs
 │   ├── pages/
-│   │   ├── Home.tsx                  # Page d'accueil avec hero, univers & pièces phares
-│   │   ├── Catalogue.tsx             # Catalogue interactif avec recherche, tri & filtres
-│   │   ├── ProductDetails.tsx        # Fiche produit détaillée avec spécifications & devis
-│   │   ├── Contact.tsx               # Informations showroom, horaires & formulaire
-│   │   └── About.tsx                 # Philosophie de la maison TESSO & matières nobles
+│   │   ├── Home.tsx              # Page d'accueil avec hero & section Instagram
+│   │   ├── Catalogue.tsx         # Catalogue complet avec 55 références
+│   │   ├── ProductDetails.tsx    # Fiche produit détaillée avec devis
+│   │   ├── Contact.tsx           # Showroom, Instagram & formulaire
+│   │   └── About.tsx             # Univers de marque AKWA WAKA
 │   ├── config/
-│   │   └── site.ts                   # Configuration globale (WhatsApp, coordonnées, etc.)
+│   │   └── site.ts               # Configuration globale
 │   ├── data/
-│   │   ├── categories.ts             # Les 6 univers de produits
-│   │   └── products.ts               # Base centrale des produits
+│   │   ├── categories.ts         # Univers de produits
+│   │   └── products.ts           # 55 produits (dont 43 meubles réels)
 │   ├── types/
-│   │   └── product.ts                # Définitions TypeScript
-│   ├── App.tsx                       # Routage SPA et bouton WhatsApp flottant
-│   ├── index.css                     # Styles Tailwind CSS et utilitaires de luxe
+│   │   └── product.ts            # Définitions TypeScript
+│   ├── App.tsx                   # Routage SPA et bouton WhatsApp flottant
+│   ├── index.css                 # Styles Tailwind CSS et utilitaires de marque
 │   └── main.tsx
-├── Dockerfile                        # Multi-stage build Node -> Nginx
-├── docker-compose.yml                # Configuration Compose exposant le port 8080
-├── nginx.conf                        # Configuration Nginx avec fallback SPA & Gzip
-├── .dockerignore
+├── Dockerfile                    # Multi-stage build Node -> Nginx
+├── docker-compose.yml            # Configuration Compose exposant le port 8080
+├── nginx.conf                    # Configuration Nginx avec fallback SPA & Gzip
 ├── package.json
 ├── tailwind.config.js
-├── tsconfig.json
 └── vite.config.ts
 ```

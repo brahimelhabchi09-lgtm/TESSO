@@ -11,12 +11,12 @@ interface SearchBarProps {
 export const SearchBar: React.FC<SearchBarProps> = ({
   value,
   onChange,
-  placeholder = "Rechercher par nom ou référence (ex: 2043GR-40, WC, vasque...)",
+  placeholder = "Rechercher par nom ou référence (ex: V60, V2, Y11, WC, vasque...)",
   className = "",
 }) => {
   return (
     <div className={`relative w-full ${className}`}>
-      <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-[#91959E]">
+      <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-[#627180]">
         <Search className="w-4 h-4" />
       </div>
 
@@ -25,14 +25,14 @@ export const SearchBar: React.FC<SearchBarProps> = ({
         value={value}
         onChange={(e) => onChange(e.target.value)}
         placeholder={placeholder}
-        className="w-full pl-10 pr-10 py-3 bg-white border border-[#DDD7CC] hover:border-[#C5A880] focus:border-[#AD926B] focus:ring-1 focus:ring-[#AD926B] text-sm text-[#1E2024] placeholder-[#9A9EA7] transition-all outline-none"
+        className="w-full pl-10 pr-10 py-3 bg-white border border-[#E2DFD7] hover:border-[#08A6C1] focus:border-[#08A6C1] focus:ring-1 focus:ring-[#08A6C1] text-sm text-[#202B35] placeholder-[#909DAA] transition-all outline-none"
       />
 
       {value && (
         <button
           type="button"
           onClick={() => onChange('')}
-          className="absolute inset-y-0 right-0 pr-3 flex items-center text-[#91959E] hover:text-[#1E2024]"
+          className="absolute inset-y-0 right-0 pr-3 flex items-center text-[#627180] hover:text-[#092C49]"
           aria-label="Effacer la recherche"
         >
           <X className="w-4 h-4" />

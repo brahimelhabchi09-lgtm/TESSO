@@ -23,14 +23,14 @@ export const CategoryFilter: React.FC<CategoryFilterProps> = ({
         onClick={() => onSelectCategory('all')}
         className={`whitespace-nowrap px-4 py-2 text-xs uppercase tracking-wider font-medium border transition-all ${
           selectedCategory === 'all'
-            ? 'bg-[#141416] text-[#F5F2EB] border-[#141416] shadow-sm'
-            : 'bg-white text-[#5F636E] border-[#E2DCD1] hover:border-[#C5A880] hover:text-[#141416]'
+            ? 'bg-[#092C49] text-white border-[#092C49] shadow-sm'
+            : 'bg-white text-[#627180] border-[#E2DFD7] hover:border-[#08A6C1] hover:text-[#092C49]'
         }`}
       >
         <span>Tous les produits</span>
         {totalCount > 0 && (
           <span className={`ml-2 text-[10px] px-1.5 py-0.5 rounded-full ${
-            selectedCategory === 'all' ? 'bg-[#2A2D35] text-[#C5A880]' : 'bg-[#F2ECE1] text-[#71757E]'
+            selectedCategory === 'all' ? 'bg-[#08A6C1] text-white' : 'bg-[#E9F4F5] text-[#092C49]'
           }`}>
             {totalCount}
           </span>
@@ -49,14 +49,14 @@ export const CategoryFilter: React.FC<CategoryFilterProps> = ({
             onClick={() => onSelectCategory(cat.name)}
             className={`whitespace-nowrap px-4 py-2 text-xs uppercase tracking-wider font-medium border transition-all ${
               isSelected
-                ? 'bg-[#141416] text-[#F5F2EB] border-[#141416] shadow-sm'
-                : 'bg-white text-[#5F636E] border-[#E2DCD1] hover:border-[#C5A880] hover:text-[#141416]'
+                ? 'bg-[#092C49] text-white border-[#092C49] shadow-sm'
+                : 'bg-white text-[#627180] border-[#E2DFD7] hover:border-[#08A6C1] hover:text-[#092C49]'
             }`}
           >
             <span>{cat.name}</span>
             {count > 0 && (
               <span className={`ml-2 text-[10px] px-1.5 py-0.5 rounded-full ${
-                isSelected ? 'bg-[#2A2D35] text-[#C5A880]' : 'bg-[#F2ECE1] text-[#71757E]'
+                isSelected ? 'bg-[#08A6C1] text-white' : 'bg-[#E9F4F5] text-[#092C49]'
               }`}>
                 {count}
               </span>

@@ -3,9 +3,11 @@ export interface SiteConfig {
   shortName: string;
   tagline: string;
   description: string;
+  logo: string;
+  pdfCatalogueUrl: string;
   whatsapp: {
     phoneNumber: string; // international format without + or spaces for wa.me, e.g. "212600000000"
-    displayNumber: string; // pretty display e.g. "+212 6 00 00 00 00"
+    displayNumber: string; // pretty display e.g. "+212 (0) 6 00 00 00 00"
     defaultMessage: string;
   };
   contact: {
@@ -30,35 +32,37 @@ export interface SiteConfig {
     onDemandText: string;
   };
   socials: {
-    instagram?: string;
+    instagram: string;
     facebook?: string;
     linkedin?: string;
   };
 }
 
 export const siteConfig: SiteConfig = {
-  name: "TESSO Sanitaire",
-  shortName: "TESSO",
-  tagline: "L'art du bain et du sanitaire haut de gamme",
-  description: "Catalogue exclusif d'équipements de salle de bain d'exception : meubles contemporains, vasques raffinées, robinetterie de prestige et sanitaires intelligents.",
+  name: "AKWA WAKA",
+  shortName: "AKWA WAKA",
+  tagline: "L'art du bain et du sanitaire contemporain",
+  description: "Catalogue exclusif d'équipements de salle de bain : meubles contemporains, vasques, robinetterie haut de gamme et sanitaires de précision.",
+  logo: "/images/brand/akwa-waka-logo.png",
+  pdfCatalogueUrl: "/CATALOGUE_MEUBLES_2026.pdf",
   whatsapp: {
     phoneNumber: "212600000000",
     displayNumber: "+212 (0) 6 00 00 00 00",
-    defaultMessage: "Bonjour TESSO, je souhaite obtenir des informations sur votre catalogue de produits sanitaires.",
+    defaultMessage: "Bonjour AKWA WAKA, je souhaite avoir plus d'informations concernant vos produits.",
   },
   contact: {
     phone: "+212 (0) 5 22 00 00 00",
-    email: "contact@tesso-sanitaire.ma",
+    email: "contact@akwawaka.ma",
     address: {
-      street: "Angle Boulevard d'Anfa & Rue de la Corniche",
+      street: "Showroom Sanitaire & Bain",
       city: "Casablanca",
       country: "Maroc",
-      full: "Angle Boulevard d'Anfa & Rue de la Corniche, Casablanca, Maroc",
+      full: "Showroom Sanitaire & Bain, Casablanca, Maroc",
     },
     openingHours: {
       weekdays: "Lundi - Vendredi : 09h00 - 19h00",
       saturday: "Samedi : 09h30 - 18h30",
-      sunday: "Dimanche : Sur rendez-vous privé",
+      sunday: "Dimanche : Sur rendez-vous",
     },
   },
   currency: {
@@ -68,14 +72,12 @@ export const siteConfig: SiteConfig = {
     onDemandText: "Prix sur demande",
   },
   socials: {
-    instagram: "https://instagram.com",
-    facebook: "https://facebook.com",
-    linkedin: "https://linkedin.com",
+    instagram: "https://www.instagram.com/akwa_waka/",
   },
 };
 
 /**
- * Format price according to luxury catalogue rules
+ * Format price according to catalogue rules
  * - null or undefined => "Prix sur demande"
  * - number => formatted with thousand separators and currency symbol
  */
@@ -104,6 +106,6 @@ export function getWhatsAppUrl(customMessage?: string): string {
  * Generate a direct WhatsApp inquiry URL for a specific product
  */
 export function getProductWhatsAppUrl(product: { name: string; reference: string }): string {
-  const text = `Bonjour TESSO, je souhaite demander un devis / des informations pour le produit suivant :\n\n• Produit : ${product.name}\n• Référence : ${product.reference}\n\nMerci d'avance pour votre retour.`;
+  const text = `Bonjour AKWA WAKA, je souhaite demander des informations et un devis pour le produit suivant :\n\n• Produit : ${product.name}\n• Référence : ${product.reference}\n\nMerci d'avance pour votre retour.`;
   return getWhatsAppUrl(text);
 }

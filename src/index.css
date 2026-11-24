@@ -5,8 +5,8 @@
 @layer base {
   html {
     font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
-    color: #1A1A1E;
-    background-color: #FAF8F5;
+    color: #202B35;
+    background-color: #F5F4F0;
   }
 
   h1, h2, h3, h4, .font-serif {
@@ -15,23 +15,23 @@
   }
 }
 
-/* Custom subtle luxury scrollbar */
+/* Custom subtle luxury scrollbar with AKWA WAKA palette */
 ::-webkit-scrollbar {
   width: 8px;
   height: 8px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #F1ECE4;
+  background: #E9F4F5;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #C5A880;
+  background: #08A6C1;
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #A5865E;
+  background: #092C49;
 }
 
 /* Luxury transitions */
@@ -39,8 +39,14 @@
   transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
+.text-aqua-gradient {
+  background: linear-gradient(135deg, #08A6C1 0%, #38BDF8 50%, #092C49 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
 .text-gold-gradient {
-  background: linear-gradient(135deg, #D4AF37 0%, #C5A880 50%, #8C6F47 100%);
+  background: linear-gradient(135deg, #08A6C1 0%, #22D3EE 60%, #092C49 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }

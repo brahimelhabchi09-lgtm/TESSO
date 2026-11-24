@@ -1,4 +1,26 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none">
-  <rect width="32" height="32" rx="6" fill="#1C1C1E"/>
-  <path d="M7 10h18M16 10v14" stroke="#D4AF37" stroke-width="2.5" stroke-linecap="round"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <defs>
+    <linearGradient id="dropGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#08A6C1"/>
+      <stop offset="50%" stop-color="#092C49"/>
+      <stop offset="100%" stop-color="#092C49"/>
+    </linearGradient>
+    <linearGradient id="aquaWave" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#08A6C1"/>
+      <stop offset="100%" stop-color="#34D399"/>
+    </linearGradient>
+  </defs>
+  <!-- Background drop shape -->
+  <path d="M32 4 C32 4, 10 28, 10 42 C10 54, 20 62, 32 62 C44 62, 54 54, 54 42 C54 28, 32 4, 32 4 Z" fill="url(#dropGrad)"/>
+  <!-- Inner wave -->
+  <path d="M12 44 Q 22 52, 32 46 T 52 44 C 54 48, 50 58, 32 60 C 14 60, 10 50, 12 44 Z" fill="#08A6C1" opacity="0.8"/>
+  <!-- Shower head icon inside drop -->
+  <path d="M26 34 V22 C26 19, 36 19, 36 22 V25" stroke="#FFFFFF" stroke-width="2.5" stroke-linecap="round"/>
+  <path d="M30 25 H42 C43 25, 43 28, 36 29 C29 28, 29 25, 30 25 Z" fill="#FFFFFF"/>
+  <!-- Water droplets -->
+  <circle cx="33" cy="32" r="1" fill="#08A6C1"/>
+  <circle cx="36" cy="32" r="1" fill="#08A6C1"/>
+  <circle cx="39" cy="32" r="1" fill="#08A6C1"/>
+  <circle cx="34" cy="36" r="1" fill="#FFFFFF"/>
+  <circle cx="38" cy="36" r="1" fill="#FFFFFF"/>
 </svg>
