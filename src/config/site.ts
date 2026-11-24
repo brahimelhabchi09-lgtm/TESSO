@@ -46,12 +46,12 @@ export const siteConfig: SiteConfig = {
   logo: "/images/brand/akwa-waka-logo.png",
   pdfCatalogueUrl: "/CATALOGUE_MEUBLES_2026.pdf",
   whatsapp: {
-    phoneNumber: "212600000000",
-    displayNumber: "+212 (0) 6 00 00 00 00",
+    phoneNumber: "212699084841",
+    displayNumber: "+212 699-084841",
     defaultMessage: "Bonjour AKWA WAKA, je souhaite avoir plus d'informations concernant vos produits.",
   },
   contact: {
-    phone: "+212 (0) 5 22 00 00 00",
+    phone: "+212 699-084841",
     email: "contact@akwawaka.ma",
     address: {
       street: "Showroom Sanitaire & Bain",

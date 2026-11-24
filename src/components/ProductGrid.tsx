@@ -31,23 +31,23 @@ export const ProductGrid: React.FC<ProductGridProps> = ({
 
   if (products.length === 0) {
     return (
-      <div className="flex flex-col items-center justify-center py-20 px-4 text-center bg-white border border-dashed border-[#DCD6C9]">
-        <div className="w-16 h-16 rounded-full bg-[#FAF8F5] border border-[#E8E2D7] flex items-center justify-center text-[#AD926B] mb-4">
+      <div className="flex flex-col items-center justify-center py-20 px-4 text-center bg-white border border-dashed border-[#E2DFD7]">
+        <div className="w-16 h-16 rounded-full bg-[#E9F4F5] border border-[#08A6C1]/20 flex items-center justify-center text-[#08A6C1] mb-4">
           <SearchX className="w-8 h-8 stroke-[1.5]" />
         </div>
-        <h3 className="font-serif text-2xl font-medium text-[#1E2024] mb-2">
+        <h3 className="font-serif text-2xl font-medium text-[#092C49] mb-2">
           Aucun produit ne correspond à votre recherche
         </h3>
-        <p className="text-sm text-[#7D818A] max-w-md mb-6">
+        <p className="text-sm text-[#627180] max-w-md mb-6">
           Essayez d'ajuster vos filtres, de vérifier l'orthographe du nom ou de la référence, ou réinitialisez la sélection.
         </p>
         {onResetFilters && (
           <button
             type="button"
             onClick={onResetFilters}
-            className="inline-flex items-center gap-2 px-5 py-2.5 bg-[#141416] hover:bg-[#282B33] text-[#FAF8F5] text-xs font-semibold uppercase tracking-wider transition-colors"
+            className="inline-flex items-center gap-2 px-5 py-2.5 bg-[#092C49] hover:bg-[#061D31] text-white text-xs font-semibold uppercase tracking-wider transition-colors shadow-sm"
           >
-            <RotateCcw className="w-4 h-4 text-[#C5A880]" />
+            <RotateCcw className="w-4 h-4 text-[#08A6C1]" />
             <span>Réinitialiser les filtres</span>
           </button>
         )}
