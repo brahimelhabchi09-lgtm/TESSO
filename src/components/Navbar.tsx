@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, MessageSquare, PhoneCall, ArrowUpRight, Search, FileText, Instagram } from 'lucide-react';
+import { Menu, X, MessageSquare, PhoneCall, ArrowUpRight, Search, FileText, Instagram, ChevronDown } from 'lucide-react';
 import { siteConfig, getWhatsAppUrl } from '../config/site';
+import { ALUMINIUM_CATEGORIES, CATEGORIES } from '../data/categories';
 
 export const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [openUniverse, setOpenUniverse] = useState<'sanitaire' | 'aluminium' | null>(null);
   const [isScrolled, setIsScrolled] = useState(false);
   const location = useLocation();
 
@@ -19,17 +21,26 @@ export const Navbar: React.FC = () => {
   // Close mobile drawer on route change
   useEffect(() => {
     setIsOpen(false);
-  }, [location.pathname]);
+    setOpenUniverse(null);
+  }, [location.pathname, location.search]);
 
   const navLinks = [
     { name: "Accueil", path: "/" },
-    { name: "Catalogue", path: "/catalogue" },
-    { name: "L'Univers AKWA WAKA", path: "/a-propos" },
-    { name: "Contact & Showroom", path: "/contact" },
+    { name: "Sanitaire", path: "/catalogue" },
+    { name: "Aluminium", path: "/aluminium" },
+    { name: "Portes de garage", path: "/aluminium?category=Portes%20de%20garage" },
+    { name: "À propos", path: "/a-propos" },
+    { name: "Contact", path: "/contact" },
   ];
 
   const isActive = (path: string) => {
     if (path === '/') return location.pathname === '/';
+    if (path.includes('?category=Portes')) {
+      return location.pathname === '/aluminium' && location.search.includes('Portes');
+    }
+    if (path === '/aluminium') {
+      return location.pathname.startsWith('/aluminium') && !location.search.includes('Portes');
+    }
     return location.pathname.startsWith(path);
   };
 
@@ -84,8 +95,8 @@ export const Navbar: React.FC = () => {
       <header
         className={`sticky top-0 z-50 transition-all duration-300 ${
           isScrolled
-            ? 'bg-white/95 backdrop-blur-md shadow-sm border-b border-[#E2DFD7] py-3'
-            : 'bg-[#F5F4F0] border-b border-[#E2DFD7] py-4'
+            ? 'bg-[#F7FAFC]/95 backdrop-blur-md shadow-sm border-b border-[#CBD5E1] py-3'
+            : 'bg-[#F7FAFC]/90 backdrop-blur-md border-b border-[#CBD5E1]/80 py-4'
         }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -100,21 +111,89 @@ export const Navbar: React.FC = () => {
             </Link>
 
             {/* Desktop Navigation Links */}
-            <nav className="hidden md:flex items-center space-x-8">
-              {navLinks.map((link) => (
+            <nav className="hidden lg:flex items-center gap-1">
+              <Link
+                to="/"
+                className={`px-3 py-2 text-sm tracking-wide font-medium ${
+                  isActive('/') ? 'text-[#092C49]' : 'text-[#627180] hover:text-[#092C49]'
+                }`}
+              >
+                Accueil
+              </Link>
+
+              <div
+                className="relative"
+                onMouseEnter={() => setOpenUniverse('sanitaire')}
+                onMouseLeave={() => setOpenUniverse(null)}
+              >
                 <Link
-                  key={link.path}
-                  to={link.path}
-                  className={`text-sm tracking-wide transition-colors relative py-1 font-medium ${
-                    isActive(link.path)
-                      ? 'text-[#092C49] font-semibold'
+                  to="/catalogue"
+                  className={`inline-flex items-center gap-1 px-3 py-2 text-sm tracking-wide font-medium ${
+                    isActive('/catalogue') ? 'text-[#092C49]' : 'text-[#627180] hover:text-[#092C49]'
+                  }`}
+                >
+                  Sanitaire
+                  <ChevronDown className="w-3.5 h-3.5" />
+                </Link>
+                {openUniverse === 'sanitaire' && (
+                  <div className="absolute left-0 top-full z-50 w-72 pt-2">
+                    <div className="glass-panel bg-white/95 p-3 shadow-iridescent">
+                      {CATEGORIES.map((cat) => (
+                        <Link
+                          key={cat.id}
+                          to={`/catalogue?category=${encodeURIComponent(cat.name)}`}
+                          className="block px-3 py-2 text-xs text-[#202B35] hover:bg-[#E9F4F5] hover:text-[#092C49]"
+                        >
+                          {cat.name}
+                        </Link>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </div>
+
+              <div
+                className="relative"
+                onMouseEnter={() => setOpenUniverse('aluminium')}
+                onMouseLeave={() => setOpenUniverse(null)}
+              >
+                <Link
+                  to="/aluminium"
+                  className={`inline-flex items-center gap-1 px-3 py-2 text-sm tracking-wide font-medium ${
+                    location.pathname.startsWith('/aluminium') && !location.search.includes('Portes')
+                      ? 'text-[#092C49]'
                       : 'text-[#627180] hover:text-[#092C49]'
                   }`}
                 >
+                  Aluminium
+                  <ChevronDown className="w-3.5 h-3.5" />
+                </Link>
+                {openUniverse === 'aluminium' && (
+                  <div className="absolute left-0 top-full z-50 w-72 pt-2">
+                    <div className="glass-panel bg-white/95 p-3 shadow-iridescent">
+                      {ALUMINIUM_CATEGORIES.map((cat) => (
+                        <Link
+                          key={cat.id}
+                          to={`/aluminium?category=${encodeURIComponent(cat.name)}`}
+                          className="block px-3 py-2 text-xs text-[#202B35] hover:bg-[#E9F4F5] hover:text-[#092C49]"
+                        >
+                          {cat.name}
+                        </Link>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </div>
+
+              {navLinks.slice(3).map((link) => (
+                <Link
+                  key={link.path}
+                  to={link.path}
+                  className={`px-3 py-2 text-sm tracking-wide font-medium ${
+                    isActive(link.path) ? 'text-[#092C49]' : 'text-[#627180] hover:text-[#092C49]'
+                  }`}
+                >
                   {link.name}
-                  {isActive(link.path) && (
-                    <span className="absolute bottom-0 left-0 w-full h-[2px] bg-[#08A6C1] rounded-full" />
-                  )}
                 </Link>
               ))}
             </nav>
@@ -153,7 +232,7 @@ export const Navbar: React.FC = () => {
             </div>
 
             {/* Mobile menu trigger button */}
-            <div className="flex items-center md:hidden space-x-2">
+            <div className="flex items-center lg:hidden space-x-2">
               <a
                 href={siteConfig.socials.instagram}
                 target="_blank"
@@ -186,7 +265,7 @@ export const Navbar: React.FC = () => {
 
         {/* Mobile slide-down menu */}
         {isOpen && (
-          <div className="md:hidden border-t border-[#E2DFD7] bg-[#F5F4F0] px-6 py-6 shadow-xl animate-in slide-in-from-top-4 duration-200">
+          <div className="lg:hidden border-t border-[#CBD5E1] bg-[#F7FAFC] px-6 py-6 shadow-xl max-h-[75vh] overflow-y-auto">
             <div className="flex flex-col space-y-4">
               {navLinks.map((link) => (
                 <Link

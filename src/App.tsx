@@ -1,11 +1,14 @@
 import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+import { AnimatePresence, MotionConfig, motion } from 'framer-motion';
 import { MessageSquare } from 'lucide-react';
 import { Navbar } from './components/Navbar';
 import { Footer } from './components/Footer';
 import { Home } from './pages/Home';
 import { Catalogue } from './pages/Catalogue';
 import { ProductDetails } from './pages/ProductDetails';
+import { Aluminium } from './pages/Aluminium';
+import { AluminiumDetails } from './pages/AluminiumDetails';
 import { Contact } from './pages/Contact';
 import { About } from './pages/About';
 import { getWhatsAppUrl } from './config/site';
@@ -15,28 +18,50 @@ const ScrollToTop: React.FC = () => {
   const { pathname, search } = useLocation();
 
   useEffect(() => {
-    window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    window.scrollTo({ top: 0, left: 0, behavior: reduce ? 'auto' : 'smooth' });
   }, [pathname, search]);
 
   return null;
 };
 
+const AnimatedRoutes: React.FC = () => {
+  const location = useLocation();
+
+  return (
+    <AnimatePresence mode="wait">
+      <motion.div
+        key={location.pathname}
+        initial={{ opacity: 0, y: 14 }}
+        animate={{ opacity: 1, y: 0 }}
+        exit={{ opacity: 0, y: -8 }}
+        transition={{ duration: 0.38, ease: [0.16, 1, 0.3, 1] }}
+      >
+        <Routes location={location}>
+          <Route path="/" element={<Home />} />
+          <Route path="/catalogue" element={<Catalogue />} />
+          <Route path="/catalogue/:id" element={<ProductDetails />} />
+          <Route path="/aluminium" element={<Aluminium />} />
+          <Route path="/aluminium/:id" element={<AluminiumDetails />} />
+          <Route path="/a-propos" element={<About />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="*" element={<Home />} />
+        </Routes>
+      </motion.div>
+    </AnimatePresence>
+  );
+};
+
 export const App: React.FC = () => {
   return (
+    <MotionConfig reducedMotion="user">
     <Router>
       <ScrollToTop />
-      <div className="flex flex-col min-h-screen bg-[#F5F4F0] text-[#202B35]">
+      <div className="flex flex-col min-h-screen bg-[#F7FAFC] text-[#202B35]">
         <Navbar />
 
         <main className="flex-grow">
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/catalogue" element={<Catalogue />} />
-            <Route path="/catalogue/:id" element={<ProductDetails />} />
-            <Route path="/a-propos" element={<About />} />
-            <Route path="/contact" element={<Contact />} />
-            <Route path="*" element={<Home />} />
-          </Routes>
+          <AnimatedRoutes />
         </main>
 
         <Footer />
@@ -70,6 +95,7 @@ export const App: React.FC = () => {
         </div>
       </div>
     </Router>
+    </MotionConfig>
   );
 };
 

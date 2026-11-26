@@ -6,7 +6,7 @@
   html {
     font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
     color: #202B35;
-    background-color: #F5F4F0;
+    background-color: #F7FAFC;
   }
 
   h1, h2, h3, h4, .font-serif {
@@ -45,8 +45,108 @@
   -webkit-text-fill-color: transparent;
 }
 
+.text-iridescent-gradient {
+  background: linear-gradient(120deg, #F7FAFC 0%, #68C4D3 38%, #CBD5E1 68%, #A78BFA 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
 .text-gold-gradient {
   background: linear-gradient(135deg, #08A6C1 0%, #22D3EE 60%, #092C49 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+}
+
+/* Subtle Iridescent 3D Glass & Chrome Utilities */
+.glass-panel {
+  background: rgba(247, 250, 252, 0.78);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(203, 213, 225, 0.65);
+}
+
+.glass-panel-dark {
+  background: rgba(16, 24, 32, 0.68);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(8, 166, 193, 0.28);
+}
+
+.iridescent-border {
+  position: relative;
+}
+
+.iridescent-border::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  padding: 1px;
+  background: linear-gradient(
+    135deg,
+    rgba(8, 166, 193, 0.55),
+    rgba(203, 213, 225, 0.45),
+    rgba(139, 92, 246, 0.35),
+    rgba(8, 166, 193, 0.55)
+  );
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+  border-radius: inherit;
+}
+
+/* Subtle 3D Perspective Card Hover (disabled on reduced motion) */
+.perspective-container {
+  perspective: 1100px;
+}
+
+.card-3d-tilt {
+  transform-style: preserve-3d;
+  transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .card-3d-tilt:hover {
+    transform: translateY(-4px) rotateX(1.5deg) rotateY(-1.5deg);
+  }
+}
+
+/* Liquid chrome sheen sweep on hover */
+.chrome-sheen {
+  position: relative;
+  overflow: hidden;
+}
+
+.chrome-sheen::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -120%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(
+    105deg,
+    transparent 20%,
+    rgba(255, 255, 255, 0.24) 50%,
+    transparent 80%
+  );
+  transition: left 0.65s ease;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .chrome-sheen:hover::after {
+    left: 140%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .animate-ping,
+  .animate-pulse {
+    animation: none !important;
+  }
 }

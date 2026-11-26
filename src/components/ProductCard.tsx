@@ -12,7 +12,8 @@ interface ProductCardProps {
 
 export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   return (
-    <div className="group relative flex flex-col bg-white border border-[#E2DFD7] hover:border-[#08A6C1] transition-all duration-300 hover:shadow-luxury-hover">
+    <div className="perspective-container h-full">
+      <div className="group relative flex flex-col h-full bg-white/95 backdrop-blur-sm border border-[#CBD5E1]/80 hover:border-[#08A6C1] transition-all duration-300 card-3d-tilt hover:shadow-iridescent">
       {/* Category & Status Badges */}
       <div className="absolute top-3 left-3 right-3 z-10 flex items-center justify-between pointer-events-none">
         <span className="text-[10px] font-semibold tracking-wider uppercase bg-[#092C49]/90 backdrop-blur-sm text-white px-2.5 py-1">
@@ -100,6 +101,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
             <span>Devis</span>
           </a>
         </div>
+      </div>
       </div>
     </div>
   );

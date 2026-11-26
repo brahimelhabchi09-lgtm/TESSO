@@ -15,12 +15,12 @@ export const About: React.FC = () => {
               Maison de Sanitaire & Bain
             </div>
             <h1 className="font-serif text-3xl sm:text-6xl font-light text-white mb-4 leading-tight">
-              L'Art du Bain Contemporain <br />
-              <span className="italic text-[#08A6C1]">Signé AKWA WAKA</span>
+              Sanitaire &amp; Menuiserie Aluminium <br />
+              <span className="italic text-iridescent-gradient">Signé AKWA WAKA</span>
             </h1>
             <p className="text-sm sm:text-base text-[#E9F4F5]/85 font-light leading-relaxed">
-              Chez AKWA WAKA, la salle de bain est pensée comme un lieu d'harmonie et d'épure : des meubles modernes, 
-              des équipements sanitaires soignés et des finitions durables pour transformer chaque espace en un showroom privé.
+              Chez AKWA WAKA, chaque espace de vie est pensé avec exigence : du mobilier et de l&apos;équipement sanitaire contemporain 
+              jusqu&apos;aux fenêtres, portes, baies vitrées et portes de garage en aluminium sur mesure.
             </p>
           </div>
         </div>
@@ -119,8 +119,15 @@ export const About: React.FC = () => {
                 to="/catalogue"
                 className="px-8 py-3.5 bg-[#08A6C1] hover:bg-[#078CA3] text-white text-xs font-semibold uppercase tracking-wider transition-colors inline-flex items-center gap-2 shadow-sm"
               >
-                <span>Consulter le catalogue</span>
+                <span>Découvrir le sanitaire</span>
                 <ArrowRight className="w-4 h-4" />
+              </Link>
+              <Link
+                to="/aluminium"
+                className="px-8 py-3.5 bg-[#061D31] hover:bg-[#123D64] border border-[#08A6C1]/50 text-white text-xs font-semibold uppercase tracking-wider transition-colors inline-flex items-center gap-2"
+              >
+                <span>Explorer l&apos;aluminium</span>
+                <ArrowRight className="w-4 h-4 text-[#08A6C1]" />
               </Link>
               <a
                 href={getWhatsAppUrl("Bonjour AKWA WAKA, je souhaite échanger sur un projet avec votre équipe.")}

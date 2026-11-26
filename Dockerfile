@@ -24,7 +24,7 @@ COPY nginx.conf /etc/nginx/conf.d/default.conf
 COPY --from=builder /app/dist /usr/share/nginx/html
 
 # Expose container port
-EXPOSE 40
+EXPOSE 80
 
 # Run nginx in foreground
 CMD ["nginx", "-g", "daemon off;"]

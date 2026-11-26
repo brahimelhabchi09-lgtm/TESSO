@@ -1,6 +1,6 @@
-# AKWA WAKA — Catalogue Sanitaire & Meubles de Salle de Bain
+# AKWA WAKA — Sanitaire & Menuiserie Aluminium
 
-Catalogue web moderne, élégant et épuré pour la marque d'équipements sanitaires et mobilier de salle de bain contemporain **AKWA WAKA**.
+Catalogue premium pour **AKWA WAKA** : meubles de salle de bain et menuiserie aluminium (fenêtres, portes, baies vitrées, portes de garage), avec nuancier, dimensions de devis et demande WhatsApp.
 
 ---
 
@@ -142,10 +142,12 @@ TESSO/
 │   │   ├── SearchBar.tsx         # Recherche par nom et par référence
 │   │   └── CategoryFilter.tsx    # Filtres par univers avec compteurs
 │   ├── pages/
-│   │   ├── Home.tsx              # Page d'accueil avec hero & section Instagram
-│   │   ├── Catalogue.tsx         # Catalogue complet avec 55 références
-│   │   ├── ProductDetails.tsx    # Fiche produit détaillée avec devis
-│   │   ├── Contact.tsx           # Showroom, Instagram & formulaire
+│   │   ├── Home.tsx              # Accueil iridescent, deux univers
+│   │   ├── Catalogue.tsx         # Catalogue sanitaire
+│   │   ├── ProductDetails.tsx    # Fiche sanitaire
+│   │   ├── Aluminium.tsx         # Catalogue aluminium, filtres et devis
+│   │   ├── AluminiumDetails.tsx  # Fiche aluminium, teinte et dimensions
+│   │   ├── Contact.tsx           # Showroom, Instagram & devis
 │   │   └── About.tsx             # Univers de marque AKWA WAKA
 │   ├── config/
 │   │   └── site.ts               # Configuration globale

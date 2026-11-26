@@ -41,8 +41,8 @@ export interface SiteConfig {
 export const siteConfig: SiteConfig = {
   name: "AKWA WAKA",
   shortName: "AKWA WAKA",
-  tagline: "L'art du bain et du sanitaire contemporain",
-  description: "Catalogue exclusif d'équipements de salle de bain : meubles contemporains, vasques, robinetterie haut de gamme et sanitaires de précision.",
+  tagline: "L'élégance prend forme.",
+  description: "Des solutions raffinées pour vos espaces de vie, du sanitaire à la menuiserie aluminium : meubles de salle de bain, fenêtres, portes et portes de garage sur devis.",
   logo: "/images/brand/akwa-waka-logo.png",
   pdfCatalogueUrl: "/CATALOGUE_MEUBLES_2026.pdf",
   whatsapp: {
@@ -108,4 +108,83 @@ export function getWhatsAppUrl(customMessage?: string): string {
 export function getProductWhatsAppUrl(product: { name: string; reference: string }): string {
   const text = `Bonjour AKWA WAKA, je souhaite demander des informations et un devis pour le produit suivant :\n\n• Produit : ${product.name}\n• Référence : ${product.reference}\n\nMerci d'avance pour votre retour.`;
   return getWhatsAppUrl(text);
+}
+
+/**
+ * Format a measurement for French quotation copy (1.50 m → 1,50 m).
+ * Non-numeric placeholders such as "À préciser" are returned unchanged.
+ */
+export function formatMeasurement(value: string, unit?: string): string {
+  const trimmed = value.trim();
+  if (!trimmed || trimmed.toLowerCase() === 'à préciser') {
+    return 'À préciser';
+  }
+
+  const normalized = trimmed.replace(/\s/g, '').replace(',', '.');
+  const num = Number(normalized);
+  if (!Number.isFinite(num)) {
+    return unit ? `${trimmed} ${unit}` : trimmed;
+  }
+
+  const decimals = Math.min((normalized.split('.')[1] || '').length, 2);
+  const formatted = new Intl.NumberFormat('fr-FR', {
+    minimumFractionDigits: decimals,
+    maximumFractionDigits: 2,
+  }).format(num);
+
+  return unit ? `${formatted} ${unit}` : formatted;
+}
+
+export interface AluminiumQuotationParams {
+  productName: string;
+  reference?: string;
+  color?: string;
+  width?: string;
+  height?: string;
+  unit?: string;
+  quantity?: number;
+  message?: string;
+}
+
+/**
+ * French quotation request shared by the on-page preview and the WhatsApp link.
+ */
+export function buildAluminiumQuotationMessage(params: AluminiumQuotationParams): string {
+  const unit = params.unit || 'cm';
+  const lines = [
+    'Bonjour AKWA WAKA,',
+    '',
+    'Je souhaite demander un devis pour :',
+    '',
+    `Produit : ${params.productName}${params.reference ? ` (Réf : ${params.reference})` : ''}`,
+  ];
+
+  if (params.color) {
+    lines.push(`Couleur : ${params.color}`);
+  }
+
+  const widthLabel = formatMeasurement(params.width || '', unit);
+  const heightLabel = formatMeasurement(params.height || '', unit);
+  lines.push(`Largeur : ${widthLabel}`);
+  lines.push(`Hauteur : ${heightLabel}`);
+
+  if (params.quantity && params.quantity > 0) {
+    lines.push(`Quantité : ${params.quantity}`);
+  }
+  if (params.message && params.message.trim()) {
+    lines.push('');
+    lines.push(`Précisions : ${params.message.trim()}`);
+  }
+
+  lines.push('');
+  lines.push("Merci de me contacter pour plus d'informations.");
+
+  return lines.join('\n');
+}
+
+/**
+ * Generate a formatted French WhatsApp quotation request for custom aluminium products
+ */
+export function getAluminiumQuotationWhatsAppUrl(params: AluminiumQuotationParams): string {
+  return getWhatsAppUrl(buildAluminiumQuotationMessage(params));
 }

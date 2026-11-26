@@ -1,8 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { MapPin, Phone, Mail, Clock, MessageSquare, ArrowUpRight, ShieldCheck, Gem, Truck, Instagram, FileText } from 'lucide-react';
-import { siteConfig, getWhatsAppUrl } from '../config/site';
-import { CATEGORIES } from '../data/categories';
+import { siteConfig } from '../config/site';
+import { CATEGORIES, ALUMINIUM_CATEGORIES } from '../data/categories';
 
 export const Footer: React.FC = () => {
   return (
@@ -58,7 +58,7 @@ export const Footer: React.FC = () => {
               </span>
             </div>
             <p className="text-sm text-[#A7DBE2] leading-relaxed max-w-sm">
-              Marque spécialisée dans l'équipement sanitaire contemporain : meubles de salle de bain innovants, vasques, robinetterie et accessoires de bain.
+              Sanitaire et menuiserie aluminium : meubles de salle de bain, fenêtres, portes, baies vitrées et portes de garage, configurés selon vos teintes et vos dimensions.
             </p>
             <div className="flex flex-col sm:flex-row gap-3 pt-2">
               <a
@@ -86,27 +86,48 @@ export const Footer: React.FC = () => {
           </div>
 
           {/* Quick Categories */}
-          <div className="lg:col-span-3 space-y-4">
-            <h4 className="text-xs font-semibold uppercase tracking-[0.2em] text-[#08A6C1]">
-              Collections & Catégories
-            </h4>
-            <ul className="space-y-2.5 text-sm text-[#A7DBE2]">
-              {CATEGORIES.map((cat) => (
-                <li key={cat.id}>
-                  <Link
-                    to={`/catalogue?category=${encodeURIComponent(cat.name)}`}
-                    className="hover:text-white transition-colors flex items-center gap-1 group"
-                  >
-                    <span className="w-1 h-1 bg-[#08A6C1] rounded-full opacity-0 group-hover:opacity-100 transition-opacity"></span>
-                    <span>{cat.name}</span>
-                  </Link>
-                </li>
-              ))}
-            </ul>
+          <div className="lg:col-span-4 grid grid-cols-2 gap-6">
+            <div className="space-y-4">
+              <h4 className="text-xs font-semibold uppercase tracking-[0.2em] text-[#08A6C1]">
+                Sanitaire &amp; Bain
+              </h4>
+              <ul className="space-y-2 text-xs sm:text-sm text-[#A7DBE2]">
+                {CATEGORIES.map((cat) => (
+                  <li key={cat.id}>
+                    <Link
+                      to={`/catalogue?category=${encodeURIComponent(cat.name)}`}
+                      className="hover:text-white transition-colors flex items-center gap-1 group"
+                    >
+                      <span className="w-1 h-1 bg-[#08A6C1] rounded-full opacity-0 group-hover:opacity-100 transition-opacity"></span>
+                      <span>{cat.name}</span>
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div className="space-y-4">
+              <h4 className="text-xs font-semibold uppercase tracking-[0.2em] text-[#08A6C1]">
+                Aluminium
+              </h4>
+              <ul className="space-y-2 text-xs sm:text-sm text-[#A7DBE2]">
+                {ALUMINIUM_CATEGORIES.map((cat) => (
+                  <li key={cat.id}>
+                    <Link
+                      to={`/aluminium?category=${encodeURIComponent(cat.name)}`}
+                      className="hover:text-white transition-colors flex items-center gap-1 group"
+                    >
+                      <span className="w-1 h-1 bg-[#08A6C1] rounded-full opacity-0 group-hover:opacity-100 transition-opacity"></span>
+                      <span>{cat.name}</span>
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
 
           {/* Contact Details */}
-          <div className="lg:col-span-5 space-y-4">
+          <div className="lg:col-span-4 space-y-4">
             <h4 className="text-xs font-semibold uppercase tracking-[0.2em] text-[#08A6C1]">
               Informations & Contact
             </h4>
@@ -152,8 +173,10 @@ export const Footer: React.FC = () => {
       {/* Bottom Legal bar */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 border-t border-[#123D64] flex flex-col sm:flex-row items-center justify-between text-xs text-[#A7DBE2]/60 gap-4">
         <p>© {new Date().getFullYear()} {siteConfig.name}. Tous droits réservés.</p>
-        <div className="flex items-center space-x-6">
-          <Link to="/catalogue" className="hover:text-white transition-colors">Catalogue complet</Link>
+        <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-6">
+          <Link to="/catalogue" className="hover:text-white transition-colors">Catalogue Sanitaire</Link>
+          <span>•</span>
+          <Link to="/aluminium" className="hover:text-white transition-colors">Menuiserie Aluminium</Link>
           <span>•</span>
           <a
             href={siteConfig.socials.instagram}

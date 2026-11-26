@@ -13,6 +13,7 @@ import {
   Instagram
 } from 'lucide-react';
 import { siteConfig, getWhatsAppUrl } from '../config/site';
+import { AluminiumQuotationForm } from '../components/aluminium/AluminiumQuotationForm';
 
 export const Contact: React.FC = () => {
   const [submitted, setSubmitted] = useState(false);
@@ -29,6 +30,10 @@ export const Contact: React.FC = () => {
     setSubmitted(true);
   };
 
+  const contactWhatsAppUrl = getWhatsAppUrl(
+    `Bonjour AKWA WAKA,\n\nJe souhaite faire une demande : ${formData.subject}\n\nNom : ${formData.name}\nTéléphone : ${formData.phone}\nE-mail : ${formData.email}\n\nMessage :\n${formData.message}`
+  );
+
   return (
     <div className="min-h-screen bg-[#F5F4F0] pb-24 text-[#202B35]">
       {/* Banner */}
@@ -43,8 +48,8 @@ export const Contact: React.FC = () => {
               Contact & Espace Devis
             </h1>
             <p className="text-sm text-[#E9F4F5]/85 font-light leading-relaxed">
-              Venez découvrir nos collections en showroom ou échangez directement avec nos conseillers AKWA WAKA
-              pour concevoir la salle de bain adaptée à vos espaces.
+              Venez découvrir nos collections en showroom ou préparez un devis sanitaire et aluminium :
+              modèle, teinte, largeur, hauteur et quantité, transmis à nos conseillers AKWA WAKA.
             </p>
           </div>
         </div>
@@ -165,19 +170,28 @@ export const Contact: React.FC = () => {
                   <div className="w-12 h-12 bg-white rounded-full mx-auto flex items-center justify-center text-[#08A6C1] shadow-sm">
                     <CheckCircle2 className="w-6 h-6" />
                   </div>
-                  <h3 className="font-serif text-2xl text-[#092C49]">Demande transmise avec succès</h3>
+                  <h3 className="font-serif text-2xl text-[#092C49]">Votre demande est prête</h3>
                   <p className="text-xs sm:text-sm text-[#202B35]/80 max-w-md mx-auto">
-                    Merci <strong>{formData.name || 'cher client'}</strong>. Votre demande a bien été enregistrée par notre équipe commerciale AKWA WAKA.
+                    Merci <strong>{formData.name || 'cher client'}</strong>. Envoyez ce récapitulatif à AKWA WAKA via WhatsApp pour lancer votre demande.
                   </p>
+                  <a
+                    href={contactWhatsAppUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="mt-2 inline-flex px-6 py-3 bg-[#092C49] hover:bg-[#061D31] text-white text-xs font-semibold uppercase tracking-wider transition-colors items-center gap-2"
+                  >
+                    <MessageSquare className="w-4 h-4 text-[#25D366] fill-[#25D366]" />
+                    <span>Envoyer sur WhatsApp</span>
+                  </a>
                   <button
                     type="button"
                     onClick={() => {
                       setSubmitted(false);
                       setFormData({ name: '', email: '', phone: '', subject: 'Demande de devis', message: '' });
                     }}
-                    className="mt-4 px-6 py-2.5 bg-[#092C49] hover:bg-[#061D31] text-white text-xs font-semibold uppercase tracking-wider transition-colors"
+                    className="block mx-auto px-6 py-2.5 text-[#627180] hover:text-[#092C49] text-xs font-semibold uppercase tracking-wider transition-colors"
                   >
-                    Envoyer une autre demande
+                    Préparer une autre demande
                   </button>
                 </div>
               ) : (
@@ -263,16 +277,21 @@ export const Contact: React.FC = () => {
                     className="w-full py-4 bg-[#092C49] hover:bg-[#061D31] text-white text-xs font-semibold uppercase tracking-[0.15em] flex items-center justify-center gap-2 transition-all shadow-md"
                   >
                     <Send className="w-4 h-4 text-[#08A6C1]" />
-                    <span>Transmettre ma demande de devis</span>
+                    <span>Préparer ma demande de devis</span>
                   </button>
 
                   <p className="text-[11px] text-center text-[#627180] pt-2">
-                    Vos données sont strictement confidentielles et ne seront jamais partagées.
+                    Ce formulaire prépare un message WhatsApp. Il n&apos;enregistre aucune donnée sur le serveur.
                   </p>
                 </form>
               )}
             </div>
           </div>
+        </div>
+
+        {/* Custom Aluminium Quotation Configurator Section */}
+        <div className="mt-16">
+          <AluminiumQuotationForm />
         </div>
       </div>
     </div>

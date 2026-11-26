@@ -3,8 +3,8 @@ import { Product } from '../types/product';
 /**
  * CATALOGUE CENTRALISÉ DES PRODUITS AKWA WAKA
  * 
- * - Tous les meubles issus du CATALOGUE_MEUBLES_2026.pdf (43 références réelles)
- * - Produits sanitaires complémentaires (WC, vasques, robinetterie, douches, accessoires)
+ * - Meubles issus du CATALOGUE_MEUBLES_2026.pdf (références réelles)
+ * - Les autres univers sanitaires restent filtrables ; aucune fiche n'est ajoutée sans donnée catalogue
  * - Prix null = "Prix sur demande"
  * - Numéro WhatsApp et contact configurés dans `src/config/site.ts`
  */
